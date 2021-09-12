@@ -14,4 +14,8 @@ export class ShowService {
   find(options?: FindManyOptions<Show>): Promise<Show[] | undefined> {
     return this.repo.find(options);
   }
+
+  findOne(id: number): Promise<Show> {
+    return this.repo.findOne(id);
+  }
 }
