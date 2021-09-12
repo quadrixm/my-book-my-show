@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  BASE_API_URL,
   BOOKING_DETAIL_PATH,
   BOOKINGS_PATH,
   LOGIN_PATH,
@@ -16,6 +17,11 @@ import {ViewMovies} from "./components/ViewMovies";
 import {ViewShows} from "./components/ViewShows";
 import {ViewBookingDetail} from "./components/ViewBookingDetail";
 import {ViewBookings} from "./components/ViewBookings";
+import axios from "axios";
+
+axios.defaults.baseURL = BASE_API_URL;
+axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
+axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
 function App() {
   return (
