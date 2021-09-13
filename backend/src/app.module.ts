@@ -12,6 +12,8 @@ import { BookingService } from './services/booking.service';
 import { MovieService } from './services/movie.service';
 import { ShowService } from './services/show.service';
 import { TheatreService } from './services/theatre.service';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -26,6 +28,9 @@ import { TheatreService } from './services/theatre.service';
       synchronize: true,
     }),
     TypeOrmModule.forFeature([Booking, Movie, Show, Theatre, User]),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public'),
+    }),
   ],
   controllers: [AppController],
   providers: [
