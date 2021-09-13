@@ -30,17 +30,24 @@ export interface CreateUserDto {
   password: string;
 }
 
-export type ShowTo = {
+export interface ShowTo {
   id: number;
   movie?: Movie;
   theatre?: Theatre;
   timing: string;
-};
+}
 
 export interface CreateBookingDto {
   userId: number;
   showId: number;
   noOfSeats: number;
+}
+
+export interface BookingTo {
+  id: number;
+  show?: ShowTo;
+  noOfSeats: number;
+  bookingCode: string;
 }
 
 @Controller()
@@ -140,7 +147,23 @@ export class AppController {
 
   @Get('bookings/:bookingId')
   async getBooking(@Param() params) {
-    return this.bookingService.findOne(params.bookingId);
+    const booking = await this.bookingService.findOne(params.bookingId);
+    const show = await this.showService.findOne(booking.showId);
+    const movie = await this.movieService.findOne(show.movieId);
+    const theatre = await this.theatreService.findOne(show.theatreId);
+    const showTo: ShowTo = {
+      id: show.id,
+      movie: movie,
+      theatre: theatre,
+      timing: show.timing,
+    };
+    const bookingTo: BookingTo = {
+      id: booking.id,
+      bookingCode: booking.bookingCode,
+      noOfSeats: booking.noOfSeats,
+      show: showTo,
+    };
+    return bookingTo;
   }
 
   @Get('populate')

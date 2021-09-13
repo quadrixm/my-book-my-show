@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { DeepPartial, FindManyOptions, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Movie } from '../entities/movie.entity';
+import { Booking } from '../entities/booking.entity';
 
 @Injectable()
 export class MovieService {
@@ -13,5 +14,9 @@ export class MovieService {
 
   find(options?: FindManyOptions<Movie>): Promise<Movie[] | undefined> {
     return this.repo.find(options);
+  }
+
+  findOne(id: number): Promise<Movie> {
+    return this.repo.findOne(id);
   }
 }

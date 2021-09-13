@@ -15,4 +15,8 @@ export class TheatreService {
   find(options?: FindManyOptions<Movie>): Promise<Movie[] | undefined> {
     return this.repo.find(options);
   }
+
+  findOne(id: number): Promise<Theatre> {
+    return this.repo.findOne(id);
+  }
 }
