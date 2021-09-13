@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# # My Book My Show Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A simplified version of a movie booking website (like BookMyShow.com) with the following features.
 
 ## Available Scripts
 
