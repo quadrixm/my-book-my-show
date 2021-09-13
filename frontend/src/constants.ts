@@ -1,6 +1,7 @@
 export const BASE_API_URL = "http://localhost:3001/api";
 
 export const AUTH_USER_ID_KEY = 'authUserId';
+export const AUTH_USER_NAME_KEY = 'authUserName';
 
 export const ROOT_PATH = "/";
 export const LOGIN_PATH = "/login";

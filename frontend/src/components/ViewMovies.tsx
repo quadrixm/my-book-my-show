@@ -1,6 +1,7 @@
 import React from 'react';
 import {Redirect} from "react-router-dom";
 import {AUTH_USER_ID_KEY, LOGIN_PATH} from "../constants";
+import {HomeLayout} from "./HomeLayout";
 
 export const ViewMovies = () => {
   const signedIn = localStorage.getItem(AUTH_USER_ID_KEY) && localStorage.getItem(AUTH_USER_ID_KEY)?.length;
@@ -8,6 +9,8 @@ export const ViewMovies = () => {
     return <Redirect to={LOGIN_PATH} />;
   }
   return (
-    <div>Movies</div>
+    <HomeLayout>
+      Movies
+    </HomeLayout>
   );
 }

@@ -12,7 +12,6 @@ import {
 import {HashRouter, Route, Switch} from "react-router-dom";
 import {ViewLogin} from "./components/ViewLogin";
 import {ViewSignup} from "./components/ViewSignup";
-import {ViewHome} from "./components/ViewHome";
 import {ViewMovies} from "./components/ViewMovies";
 import {ViewShows} from "./components/ViewShows";
 import {ViewBookingDetail} from "./components/ViewBookingDetail";
@@ -27,7 +26,7 @@ function App() {
   return (
     <HashRouter>
       <Switch>
-        <Route exact={true} path={ROOT_PATH} component={ViewHome}/>
+        <Route exact={true} path={ROOT_PATH} component={ViewMovies}/>
         <Route path={LOGIN_PATH} component={ViewLogin} />
         <Route path={SIGNUP_PATH} component={ViewSignup} />
         <Route path={MOVIES_PATH} component={ViewMovies} />
