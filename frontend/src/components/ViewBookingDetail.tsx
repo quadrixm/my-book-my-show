@@ -45,7 +45,7 @@ export const ViewBookingDetail = () => {
           <Card.Text><b>Movie: </b> {booking?.show?.movie?.name ?? ''}</Card.Text>
           <Card.Text><b>Theatre: </b> {booking?.show?.theatre?.name ?? ''}</Card.Text>
           <Card.Text><b>Timings: </b> {booking?.show?.timing ?? ''}</Card.Text>
-          <br/><br/>
+          <br/>
           <Button onClick={() => onExit()}>Exit</Button>
         </Card.Body>
       </Card>

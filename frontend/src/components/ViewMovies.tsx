@@ -4,6 +4,7 @@ import {AUTH_USER_ID_KEY, LOGIN_PATH, SHOWS_PATH} from "../constants";
 import {HomeLayout} from "./HomeLayout";
 import axios from "axios";
 import {Movie} from "../types";
+import {Button, Card} from "react-bootstrap";
 
 export const ViewMovies = () => {
   const signedIn = localStorage.getItem(AUTH_USER_ID_KEY) && localStorage.getItem(AUTH_USER_ID_KEY)?.length;
@@ -26,11 +27,15 @@ export const ViewMovies = () => {
   return (
     <HomeLayout>
       {movies.map(movie => (
-        <p>
-          <Link to={{pathname: SHOWS_PATH.replace(':movieId', String(movie.id))}}>
-            {movie.name}
-          </Link>
-        </p>
+        <Card>
+          <Card.Body>
+            <Card.Text>
+              <Link to={{pathname: SHOWS_PATH.replace(':movieId', String(movie.id))}}>
+                {movie.name}
+              </Link>
+            </Card.Text>
+          </Card.Body>
+        </Card>
       ))}
     </HomeLayout>
   );
