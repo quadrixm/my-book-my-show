@@ -6,9 +6,6 @@ export class Show {
   id: number;
 
   @Column()
-  name: string;
-
-  @Column()
   movieId: number;
 
   @Column()

@@ -32,7 +32,6 @@ export interface CreateUserDto {
 
 export type ShowTo = {
   id: number;
-  name: string;
   movie?: Movie;
   theatre?: Theatre;
   timing: string;
@@ -102,8 +101,8 @@ export class AppController {
     const shows = await this.showService.find({
       where: { movieId: params.movieId },
     });
-    const movieIds = _.uniqBy(shows, 'movieId');
-    const theatreIds = _.uniqBy(shows, 'theatreId');
+    const movieIds = _.map(_.uniqBy(shows, 'movieId'), 'movieId');
+    const theatreIds = _.map(_.uniqBy(shows, 'theatreId'), 'theatreId');
     const movies = await this.movieService.find({
       where: { id: In(movieIds) },
     });
@@ -112,7 +111,6 @@ export class AppController {
     });
     return shows.map<ShowTo>((show) => ({
       id: show.id,
-      name: show.name,
       movie: movies.find((movie) => movie.id === show.movieId),
       theatre: theatres.find((theatre) => theatre.id === show.theatreId),
       timing: show.timing,
@@ -143,5 +141,20 @@ export class AppController {
   @Get('bookings/:bookingId')
   async getBooking(@Param() params) {
     return this.bookingService.findOne(params.bookingId);
+  }
+
+  @Get('populate')
+  async populate() {
+    // Added manually
+    // const movies = [
+    //   'Black Widow',
+    //   'A Quiet Place',
+    //   'Jungle Cruise',
+    //   'Free Guy',
+    //   'Cruella',
+    //   'Godzilla vs. Kong',
+    // ];
+    // const theatres = ['Eros Cinema', 'Cineplex', 'PVR Plaza'];
+    // const timings = ['10AM - 12AM', '1PM - 3PM', '4PM - 7PM', '8PM - 11PM'];
   }
 }
