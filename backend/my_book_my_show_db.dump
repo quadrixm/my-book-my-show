@@ -1,0 +1,439 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 13.1
+-- Dumped by pg_dump version 13.1
+
+-- Started on 2021-09-13 12:40:07 IST
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 201 (class 1259 OID 82855)
+-- Name: booking; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.booking (
+    id integer NOT NULL,
+    "userId" integer NOT NULL,
+    "showId" integer NOT NULL,
+    "noOfSeats" integer NOT NULL,
+    "bookingCode" character varying NOT NULL
+);
+
+
+ALTER TABLE public.booking OWNER TO postgres;
+
+--
+-- TOC entry 200 (class 1259 OID 82853)
+-- Name: booking_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.booking_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.booking_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3306 (class 0 OID 0)
+-- Dependencies: 200
+-- Name: booking_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.booking_id_seq OWNED BY public.booking.id;
+
+
+--
+-- TOC entry 203 (class 1259 OID 82866)
+-- Name: movie; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.movie (
+    id integer NOT NULL,
+    name character varying NOT NULL
+);
+
+
+ALTER TABLE public.movie OWNER TO postgres;
+
+--
+-- TOC entry 202 (class 1259 OID 82864)
+-- Name: movie_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.movie_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.movie_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3307 (class 0 OID 0)
+-- Dependencies: 202
+-- Name: movie_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.movie_id_seq OWNED BY public.movie.id;
+
+
+--
+-- TOC entry 205 (class 1259 OID 82877)
+-- Name: show; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.show (
+    id integer NOT NULL,
+    "movieId" integer NOT NULL,
+    "theatreId" integer NOT NULL,
+    timing character varying NOT NULL
+);
+
+
+ALTER TABLE public.show OWNER TO postgres;
+
+--
+-- TOC entry 204 (class 1259 OID 82875)
+-- Name: show_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.show_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.show_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3308 (class 0 OID 0)
+-- Dependencies: 204
+-- Name: show_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.show_id_seq OWNED BY public.show.id;
+
+
+--
+-- TOC entry 207 (class 1259 OID 82888)
+-- Name: theatre; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.theatre (
+    id integer NOT NULL,
+    name character varying NOT NULL
+);
+
+
+ALTER TABLE public.theatre OWNER TO postgres;
+
+--
+-- TOC entry 206 (class 1259 OID 82886)
+-- Name: theatre_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.theatre_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.theatre_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3309 (class 0 OID 0)
+-- Dependencies: 206
+-- Name: theatre_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.theatre_id_seq OWNED BY public.theatre.id;
+
+
+--
+-- TOC entry 209 (class 1259 OID 82899)
+-- Name: user; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."user" (
+    id integer NOT NULL,
+    name character varying NOT NULL,
+    email character varying NOT NULL,
+    password character varying NOT NULL
+);
+
+
+ALTER TABLE public."user" OWNER TO postgres;
+
+--
+-- TOC entry 208 (class 1259 OID 82897)
+-- Name: user_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.user_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.user_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3310 (class 0 OID 0)
+-- Dependencies: 208
+-- Name: user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.user_id_seq OWNED BY public."user".id;
+
+
+--
+-- TOC entry 3144 (class 2604 OID 82858)
+-- Name: booking id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.booking ALTER COLUMN id SET DEFAULT nextval('public.booking_id_seq'::regclass);
+
+
+--
+-- TOC entry 3145 (class 2604 OID 82869)
+-- Name: movie id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.movie ALTER COLUMN id SET DEFAULT nextval('public.movie_id_seq'::regclass);
+
+
+--
+-- TOC entry 3146 (class 2604 OID 82880)
+-- Name: show id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.show ALTER COLUMN id SET DEFAULT nextval('public.show_id_seq'::regclass);
+
+
+--
+-- TOC entry 3147 (class 2604 OID 82891)
+-- Name: theatre id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.theatre ALTER COLUMN id SET DEFAULT nextval('public.theatre_id_seq'::regclass);
+
+
+--
+-- TOC entry 3148 (class 2604 OID 82902)
+-- Name: user id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."user" ALTER COLUMN id SET DEFAULT nextval('public.user_id_seq'::regclass);
+
+
+--
+-- TOC entry 3292 (class 0 OID 82855)
+-- Dependencies: 201
+-- Data for Name: booking; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.booking (id, "userId", "showId", "noOfSeats", "bookingCode") FROM stdin;
+1	1	1	2	BOOKING1
+\.
+
+
+--
+-- TOC entry 3294 (class 0 OID 82866)
+-- Dependencies: 203
+-- Data for Name: movie; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.movie (id, name) FROM stdin;
+1	Black Widow
+2	A Quiet Place
+3	Jungle Cruise
+4	Free Guy
+5	Cruella
+6	Godzilla vs. Kong
+\.
+
+
+--
+-- TOC entry 3296 (class 0 OID 82877)
+-- Dependencies: 205
+-- Data for Name: show; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.show (id, "movieId", "theatreId", timing) FROM stdin;
+1	1	1	10AM - 12AM
+2	2	2	10AM - 12AM
+3	3	3	10AM - 12AM
+4	4	1	1PM - 3PM
+5	5	2	1PM - 3PM
+6	6	3	1PM - 3PM
+7	1	1	4PM - 7PM
+8	2	2	4PM - 7PM
+9	3	3	4PM - 7PM
+10	4	1	8PM - 11PM
+11	5	2	8PM - 11PM
+12	6	3	8PM - 11PM
+\.
+
+
+--
+-- TOC entry 3298 (class 0 OID 82888)
+-- Dependencies: 207
+-- Data for Name: theatre; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.theatre (id, name) FROM stdin;
+1	Eros Cinema
+2	Cineplex
+3	PVR Plaza
+\.
+
+
+--
+-- TOC entry 3300 (class 0 OID 82899)
+-- Dependencies: 209
+-- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."user" (id, name, email, password) FROM stdin;
+1	Rex	rex@example.com	pass
+\.
+
+
+--
+-- TOC entry 3311 (class 0 OID 0)
+-- Dependencies: 200
+-- Name: booking_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.booking_id_seq', 1, true);
+
+
+--
+-- TOC entry 3312 (class 0 OID 0)
+-- Dependencies: 202
+-- Name: movie_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.movie_id_seq', 6, true);
+
+
+--
+-- TOC entry 3313 (class 0 OID 0)
+-- Dependencies: 204
+-- Name: show_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.show_id_seq', 12, true);
+
+
+--
+-- TOC entry 3314 (class 0 OID 0)
+-- Dependencies: 206
+-- Name: theatre_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.theatre_id_seq', 3, true);
+
+
+--
+-- TOC entry 3315 (class 0 OID 0)
+-- Dependencies: 208
+-- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.user_id_seq', 1, true);
+
+
+--
+-- TOC entry 3150 (class 2606 OID 82863)
+-- Name: booking PK_49171efc69702ed84c812f33540; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.booking
+    ADD CONSTRAINT "PK_49171efc69702ed84c812f33540" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3156 (class 2606 OID 82896)
+-- Name: theatre PK_909e14276a20110d211601fd4e6; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.theatre
+    ADD CONSTRAINT "PK_909e14276a20110d211601fd4e6" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3158 (class 2606 OID 82907)
+-- Name: user PK_cace4a159ff9f2512dd42373760; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."user"
+    ADD CONSTRAINT "PK_cace4a159ff9f2512dd42373760" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3152 (class 2606 OID 82874)
+-- Name: movie PK_cb3bb4d61cf764dc035cbedd422; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.movie
+    ADD CONSTRAINT "PK_cb3bb4d61cf764dc035cbedd422" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3154 (class 2606 OID 82885)
+-- Name: show PK_e9993c2777c1d0907e845fce4d1; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.show
+    ADD CONSTRAINT "PK_e9993c2777c1d0907e845fce4d1" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3160 (class 2606 OID 82909)
+-- Name: user UQ_e12875dfb3b1d92d7d7c5377e22; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."user"
+    ADD CONSTRAINT "UQ_e12875dfb3b1d92d7d7c5377e22" UNIQUE (email);
+
+
+-- Completed on 2021-09-13 12:40:07 IST
+
+--
+-- PostgreSQL database dump complete
+--
+
