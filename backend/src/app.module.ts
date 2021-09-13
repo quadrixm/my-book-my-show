@@ -22,10 +22,10 @@ import { TheatreService } from './services/theatre.service';
       username: 'postgres',
       password: 'postgres',
       database: 'my_book_my_show_db',
-      entities: [Booking, Movie, Show, Theatre, User],
       autoLoadEntities: true,
       synchronize: true,
     }),
+    TypeOrmModule.forFeature([Booking, Movie, Show, Theatre, User]),
   ],
   controllers: [AppController],
   providers: [

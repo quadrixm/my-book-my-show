@@ -1,4 +1,4 @@
-export const BASE_API_URL = "http://localhost:3000";
+export const BASE_API_URL = "http://localhost:3001/api";
 
 export const AUTH_USER_ID_KEY = 'authUserId';
 
