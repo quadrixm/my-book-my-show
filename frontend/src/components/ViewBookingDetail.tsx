@@ -36,6 +36,7 @@ export const ViewBookingDetail = () => {
   }
   return (
     <HomeLayout>
+      <br/>
       <Card>
         <Card.Body>
           <Alert variant={'success'}>

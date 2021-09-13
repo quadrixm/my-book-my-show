@@ -57,6 +57,7 @@ export const ViewShows = () => {
   }
   return (
     <HomeLayout>
+      <br/>
       {shows.map(show => (
         <Card>
           <Card.Body>

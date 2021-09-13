@@ -4,7 +4,7 @@ import {AUTH_USER_ID_KEY, LOGIN_PATH, SHOWS_PATH} from "../constants";
 import {HomeLayout} from "./HomeLayout";
 import axios from "axios";
 import {Movie} from "../types";
-import {Button, Card} from "react-bootstrap";
+import {Card} from "react-bootstrap";
 
 export const ViewMovies = () => {
   const signedIn = localStorage.getItem(AUTH_USER_ID_KEY) && localStorage.getItem(AUTH_USER_ID_KEY)?.length;
@@ -26,6 +26,7 @@ export const ViewMovies = () => {
   }
   return (
     <HomeLayout>
+      <br/>
       {movies.map(movie => (
         <Card>
           <Card.Body>
