@@ -1,8 +1,8 @@
 import React from 'react';
 import {Redirect, useHistory, useParams} from "react-router-dom";
-import {AUTH_USER_ID_KEY, BOOKING_DETAIL_PATH, LOGIN_PATH, ROOT_PATH} from "../constants";
+import {AUTH_USER_ID_KEY, LOGIN_PATH, ROOT_PATH} from "../constants";
 import {HomeLayout} from "./HomeLayout";
-import {Booking, Show} from "../types";
+import {Booking} from "../types";
 import axios from "axios";
 import {Alert, Button, Card} from "react-bootstrap";
 
@@ -17,7 +17,7 @@ export const ViewBookingDetail = () => {
   const [booking, setBooking] = React.useState<Booking>();
 
   React.useEffect(() => {
-    axios.get(`/bookings/${bookingId}`).then(
+    axios.get(`/booking-detail/${bookingId}`).then(
       ({data}) => {
         console.log({data})
         const booking = data as Booking;

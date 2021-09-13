@@ -145,8 +145,8 @@ export class AppController {
     return this.bookingService.create(booking);
   }
 
-  @Get('bookings/:bookingId')
-  async getBooking(@Param() params) {
+  @Get('booking-detail/:bookingId')
+  async getBookingDetail(@Param() params) {
     const booking = await this.bookingService.findOne(params.bookingId);
     const show = await this.showService.findOne(booking.showId);
     const movie = await this.movieService.findOne(show.movieId);
@@ -166,18 +166,30 @@ export class AppController {
     return bookingTo;
   }
 
-  @Get('populate')
-  async populate() {
-    // Added manually
-    // const movies = [
-    //   'Black Widow',
-    //   'A Quiet Place',
-    //   'Jungle Cruise',
-    //   'Free Guy',
-    //   'Cruella',
-    //   'Godzilla vs. Kong',
-    // ];
-    // const theatres = ['Eros Cinema', 'Cineplex', 'PVR Plaza'];
-    // const timings = ['10AM - 12AM', '1PM - 3PM', '4PM - 7PM', '8PM - 11PM'];
+  @Get('bookings/:userId')
+  async getBookings(@Param() params) {
+    const bookings = await this.bookingService.find({
+      where: { userId: params.userId },
+    });
+    const bookingTos: BookingTo[] = [];
+    for (const booking of bookings) {
+      const show = await this.showService.findOne(booking.showId);
+      const movie = await this.movieService.findOne(show.movieId);
+      const theatre = await this.theatreService.findOne(show.theatreId);
+      const showTo: ShowTo = {
+        id: show.id,
+        movie: movie,
+        theatre: theatre,
+        timing: show.timing,
+      };
+      const bookingTo: BookingTo = {
+        id: booking.id,
+        bookingCode: booking.bookingCode,
+        noOfSeats: booking.noOfSeats,
+        show: showTo,
+      };
+      bookingTos.push(bookingTo);
+    }
+    return bookingTos;
   }
 }
